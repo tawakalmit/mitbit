@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mitbit — One Stop IT Solution</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --teal: #3ed9bf;
+      --teal-bright: #4fe3cb;
+      --bg-dark: #0c1512;
+      --bg-panel: #111d1a;
+      --bg-card: #16241f;
+      --wave: #0c1a14;
+      /* solid dark-green: used by solid sections AND the waves so they blend seamlessly */
+      --text: #e8f1ee;
+      --text-dim: #9fb2ac;
+      --text-faint: #6f847d;
+      --border: rgba(255, 255, 255, .07);
+      --radius: 18px;
+      --font: 'Poppins', system-ui, -apple-system, sans-serif;
+      --sans: 'Inter', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+      --display: 'Fredoka', 'Poppins', system-ui, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 28px
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--display);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -.01em
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--teal);
+      color: #062019;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 26px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .btn:hover {
+      background: var(--teal-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -8px rgba(62, 217, 191, .5)
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border)
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, .05);
+      box-shadow: none
+    }
+
+    /* ---------- logo ---------- */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: -.01em;
+    }
+
+    nav .logo {
+      visibility: hidden;
+    }
+
+    .logo svg {
+      width: 26px;
+      height: 26px;
+      color: var(--teal)
+    }
+
+    /* ---------- nav ---------- */
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 26px 0
+    }
+
+    nav .links {
+      display: flex;
+      gap: 34px;
+      font-size: 14px;
+      color: var(--text-dim)
+    }
+
+    nav .links a {
+      transition: color .2s
+    }
+
+    nav .links a:hover,
+    nav .links a.active {
+      color: var(--text)
+    }
+
+    /* ---------- hero ---------- */
+    .hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 150px 28px 90px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(20, 40, 35, .12) 0%, rgba(12, 25, 22, .30) 100%),
+        url('hero-bg.jpeg') center/cover no-repeat;
+    }
+
+    .hero canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: .7;
+      pointer-events: none
+    }
+
+    .hero .logo {
+      font-size: 30px;
+      margin-bottom: 44px;
+      position: relative;
+      z-index: 2
+    }
+
+    .hero .logo svg {
+      width: 38px;
+      height: 38px;
+      color: #fff
+    }
+
+    .hero .logo span {
+      color: #fff
+    }
+
+    .hero h1 {
+      font-size: clamp(70px, 13vw, 150px);
+      font-weight: 600;
+      color: #fff;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 8px 40px rgba(0, 0, 0, .25);
+    }
+
+    .hero p {
+      margin-top: 6px;
+      letter-spacing: .42em;
+      text-transform: uppercase;
+      font-size: 13px;
+      color: rgba(255, 255, 255, .8);
+      position: relative;
+      z-index: 2;
+      font-weight: 300;
+    }
+
+    /* ---------- section base ---------- */
+    section.block {
+      padding: 120px 0;
+      position: relative;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* ---------- wave separators (fill = --wave, blends into the solid-green side) ---------- */
+    .wave-b,
+    .wave-t {
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 100%;
+      line-height: 0;
+      z-index: 1;
+      pointer-events: none
+    }
+
+    .wave-b {
+      bottom: -1px
+    }
+
+    /* solid fill at bottom → blends with green section below */
+    .wave-t {
+      top: -1px
+    }
+
+    /* solid fill at top → blends with green section above */
+    .wave-b svg,
+    .wave-t svg {
+      display: block;
+      width: 100%;
+      height: 130px
+    }
+
+    @media(max-width:860px) {
+
+      .wave-b svg,
+      .wave-t svg {
+        height: 70px
+      }
+    }
+
+    /* shared dark textured background from the brand asset */
+    .about,
+    .services,
+    .portfolio,
+    .contact {
+      position: relative;
+      overflow: hidden
+    }
+
+    /* --- SOLID sections: flat dark green --- */
+    .about,
+    .portfolio {
+      background: var(--wave)
+    }
+
+    /* --- IMAGE sections: textured background asset (darkened) --- */
+    .services,
+    .contact {
+      background: #0b1310
+    }
+
+    .services::before,
+    .contact::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: url('mitbit-bg.jpeg') center/cover no-repeat;
+      filter: brightness(.36) saturate(1.05);
+    }
+
+    .services::before {
+      background-position: right center
+    }
+
+    .contact::before {
+      background-position: left bottom
+    }
+
+    .services::after,
+    .contact::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(8, 15, 12, .20) 0%, rgba(8, 15, 12, .5) 100%);
+    }
+
+    /* ---------- about ---------- */
+    .block .wrap {
+      position: relative;
+      z-index: 2
+    }
+
+    .about .grid {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 80px;
+      align-items: center
+    }
+
+    .glass-card {
+      position: relative;
+      border-radius: 26px;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('mitbit-bg.jpeg') left center/cover no-repeat;
+      border: 1px solid rgba(255, 255, 255, .14);
+      box-shadow: 0 40px 80px -24px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .15);
+      overflow: hidden;
+    }
+
+    .glass-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, rgba(30, 70, 80, .25), rgba(60, 90, 40, .15));
+    }
+
+    .glass-card .logo {
+      font-size: 34px;
+      z-index: 2;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, .35)
+    }
+
+    .glass-card .logo svg {
+      color: #fff;
+      width: 40px;
+      height: 40px
+    }
+
+    .glass-card .logo span {
+      color: #fff;
+      font-weight: 500
+    }
+
+    .about .eyebrow {
+      margin-bottom: 20px
+    }
+
+    .about h2 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(32px, 4vw, 46px);
+      line-height: 1.12;
+      letter-spacing: -.02em;
+      margin-bottom: 26px;
+      max-width: 480px
+    }
+
+    .about p.lead {
+      color: var(--text-dim);
+      font-size: 16px;
+      font-weight: 400;
+      max-width: 490px;
+      margin-bottom: 30px;
+      line-height: 1.65
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      font-size: 15px;
+      color: var(--text)
+    }
+
+    .feature .ic {
+      width: 24px;
+      height: 24px;
+      color: var(--teal);
+      flex-shrink: 0
+    }
+
+    .about .btn {
+      margin-top: 16px;
+      background: #182338;
+      color: #fff;
+      box-shadow: none;
+      border: 1px solid rgba(255, 255, 255, .08);
+      padding: 13px 30px;
+    }
+
+    .about .btn:hover {
+      background: #1f2c48;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .6)
+    }
+
+    /* ---------- services ---------- */
+    .services .grid {
+      display: grid;
+      grid-template-columns: .8fr 1.5fr;
+      gap: 70px;
+      align-items: center
+    }
+
+    .services .eyebrow {
+      margin-bottom: 20px
+    }
+
+    .services h2 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(34px, 4.4vw, 50px);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 28px;
+      max-width: 300px
+    }
+
+    .services p.lead {
+      color: var(--text-dim);
+      font-size: 15px;
+      font-weight: 400;
+      max-width: 340px;
+      line-height: 1.65
+    }
+
+    .svc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 26px
+    }
+
+    .svc-card {
+      display: flex;
+      gap: 22px;
+      padding: 30px 34px;
+      border-radius: 20px;
+      align-items: flex-start;
+      background: rgba(11, 18, 23, .82);
+      border: 1px solid rgba(255, 255, 255, .06);
+      transition: transform .25s, border-color .25s, background .25s;
+    }
+
+    .svc-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(62, 217, 191, .35);
+      background: rgba(16, 26, 32, .9)
+    }
+
+    .svc-ico {
+      width: 48px;
+      height: 48px;
+      border-radius: 13px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(62, 217, 191, .13);
+      color: var(--teal);
+    }
+
+    .svc-ico svg {
+      width: 24px;
+      height: 24px
+    }
+
+    .svc-card h3 {
+      font-family: var(--sans);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      margin-bottom: 9px
+    }
+
+    .svc-card p {
+      font-size: 14.5px;
+      color: var(--text-dim);
+      font-weight: 400;
+      line-height: 1.6;
+      max-width: 560px
+    }
+
+    /* ---------- portfolio ---------- */
+    .portfolio .eyebrow {
+      margin-bottom: 18px
+    }
+
+    .portfolio .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px;
+      gap: 24px
+    }
+
+    .portfolio h2 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(34px, 4.2vw, 48px);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      max-width: 360px
+    }
+
+    .portfolio .view-all {
+      color: var(--teal);
+      font-size: 14px;
+      font-weight: 500;
+      border-bottom: 1px solid var(--teal);
+      padding-bottom: 2px;
+      white-space: nowrap;
+      transition: opacity .2s
+    }
+
+    .portfolio .view-all:hover {
+      opacity: .7
+    }
+
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px
+    }
+
+    .proj-card {
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(11, 18, 23, .82);
+      border: 1px solid rgba(255, 255, 255, .06);
+      transition: transform .25s, border-color .25s
+    }
+
+    .proj-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(62, 217, 191, .35)
+    }
+
+    .proj-thumb {
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .thumb-1 {
+      background: radial-gradient(circle at 50% 60%, #e0114f, #8a0b3d 70%, #5c0730)
+    }
+
+    .thumb-2 {
+      background: radial-gradient(circle at 50% 40%, #c20d5c, #7a0a3e 75%, #4a0628)
+    }
+
+    .thumb-3 {
+      background: radial-gradient(circle at 50% 50%, #b30d4e, #6d0a38 75%, #440525)
+    }
+
+    .proj-thumb .crown {
+      color: #ff2d63;
+      opacity: .9;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .4))
+    }
+
+    .proj-body {
+      padding: 24px 24px 26px
+    }
+
+    .proj-body .tag {
+      font-size: 10.5px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: block
+    }
+
+    .proj-body h3 {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      margin-bottom: 10px
+    }
+
+    .proj-body p {
+      font-size: 13.5px;
+      color: var(--text-dim);
+      font-weight: 400;
+      line-height: 1.6
+    }
+
+    /* ---------- contact ---------- */
+    .contact .grid {
+      display: grid;
+      grid-template-columns: 1fr .95fr;
+      gap: 70px;
+      align-items: start
+    }
+
+    .form-panel {
+      background: rgba(11, 18, 23, .86);
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 22px;
+      padding: 42px 40px;
+      backdrop-filter: blur(2px)
+    }
+
+    .form-panel h2 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(26px, 3vw, 34px);
+      letter-spacing: -.02em;
+      margin-bottom: 12px
+    }
+
+    .form-panel .sub {
+      color: var(--text-dim);
+      font-size: 14px;
+      font-weight: 400;
+      margin-bottom: 30px;
+      line-height: 1.6
+    }
+
+    .field {
+      margin-bottom: 20px
+    }
+
+    .field label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 9px;
+      color: var(--text)
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      background: rgba(0, 0, 0, .28);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 14px 16px;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 400;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 104px
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(62, 217, 191, .12)
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: var(--text-faint)
+    }
+
+    .contact-info {
+      padding-top: 8px
+    }
+
+    .contact-info h2 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(26px, 3vw, 34px);
+      letter-spacing: -.02em;
+      margin-bottom: 16px
+    }
+
+    .contact-info>p {
+      color: var(--text-dim);
+      font-size: 15px;
+      font-weight: 400;
+      max-width: 360px;
+      margin-bottom: 34px;
+      line-height: 1.65
+    }
+
+    .info-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      align-items: flex-start
+    }
+
+    .info-ico {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      background: rgba(62, 217, 191, .12);
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .info-ico svg {
+      width: 20px;
+      height: 20px
+    }
+
+    .info-row .lbl {
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 4px
+    }
+
+    .info-row .val {
+      font-size: 14px;
+      color: var(--text)
+    }
+
+    .socials {
+      margin-top: 8px
+    }
+
+    .socials .lbl {
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 12px
+    }
+
+    .socials .row {
+      display: flex;
+      gap: 12px
+    }
+
+    .socials a {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      transition: background .2s, color .2s
+    }
+
+    .socials a:hover {
+      background: var(--teal);
+      color: #062019
+    }
+
+    .socials svg {
+      width: 18px;
+      height: 18px
+    }
+
+    /* ---------- footer ---------- */
+    footer {
+      background: #0c1512;
+      border-top: 1px solid var(--border);
+      padding: 34px 0
+    }
+
+    footer .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px
+    }
+
+    footer .logo {
+      font-size: 17px
+    }
+
+    footer .logo svg {
+      width: 20px;
+      height: 20px
+    }
+
+    footer .flinks {
+      display: flex;
+      gap: 28px;
+      font-size: 13px;
+      color: var(--text-dim)
+    }
+
+    footer .flinks a:hover {
+      color: var(--text)
+    }
+
+    footer .copy {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 22px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-faint)
+    }
+
+    .footer-deco {
+      height: 120px;
+      background: linear-gradient(180deg, #0c1512, #0a1420);
+      position: relative;
+      overflow: hidden
+    }
+
+    .footer-deco svg {
+      position: absolute;
+      bottom: 0;
+      width: 100%
+    }
+
+    /* ---------- responsive ---------- */
+    @media(max-width:860px) {
+
+      .about .grid,
+      .services .grid,
+      .contact .grid {
+        grid-template-columns: 1fr;
+        gap: 40px
+      }
+
+      .proj-grid {
+        grid-template-columns: 1fr
+      }
+
+      .portfolio .head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px
+      }
+
+      nav .links {
+        display: none
+      }
+
+      footer .row,
+      footer .copy {
+        flex-direction: column;
+        text-align: center
+      }
+
+      .hero h1 {
+        font-size: clamp(56px, 20vw, 90px)
+      }
+    }
+
+    .black-logo {
+      width: 300px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header>
+    <div class="wrap">
+      <nav>
+        <a class="logo" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z" />
+            <path d="M3 7l9 5 9-5M12 12v10" />
+          </svg>
+          <span>mitbit</span>
+        </a>
+        <div class="links">
+          <a href="#" class="active">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <canvas id="net"></canvas>
+    <!-- <a class="logo" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z" />
+        <path d="M3 7l9 5 9-5M12 12v10" />
+      </svg>
+      <span>mitbit</span>
+    </a> -->
+    <img class="black-logo" src="mitbit-black-logo-removebg-preview.png" />
+    <!-- <h1>welcome</h1> -->
+    <p>Let's make it real</p>
+    <div class="wave-b"><svg viewBox="0 0 1440 130" preserveAspectRatio="none">
+        <path fill="var(--wave)" d="M0,54 C240,110 480,18 720,58 C960,98 1200,22 1440,66 L1440,130 L0,130 Z" />
+      </svg></div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="block about" id="about">
+    <div class="wrap grid">
+      <div class="glass-card">
+        <!-- <div class="logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z" />
+            <path d="M3 7l9 5 9-5M12 12v10" />
+          </svg>
+          <span>mitbit</span>
+        </div> -->
+        <img class="black-logo" src="mitbit-black-logo-removebg-preview.png" />
+      </div>
+      <div>
+        <span class="eyebrow">About Us</span>
+        <h2>Providing High-Tier Digital Architectures for Tomorrow</h2>
+        <p class="lead">Mitbit stands at the forefront of the IT solutions sector. We translate complex
+          hardware/software integrations into functional, clean, and highly secure platforms. Whether scaling custom
+          software or designing fail-safe enterprise networks, our methodologies are rooted in precision and longevity.
+        </p>
+        <div class="feature">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+          Secured-by-design baseline frameworks
+        </div>
+        <div class="feature">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m13 2-3 7h5l-3 7" />
+            <path d="M5 12h.01M19 12h.01M12 19v.01M12 5v.01" />
+          </svg>
+          High velocity deployment pipeline mechanisms
+        </div>
+        <button class="btn">Read More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="block services" id="services">
+    <div class="wave-t"><svg viewBox="0 0 1440 130" preserveAspectRatio="none">
+        <path fill="var(--wave)" d="M0,0 L1440,0 L1440,76 C1200,112 960,44 720,72 C480,100 240,36 0,70 Z" />
+      </svg></div>
+    <div class="wrap grid">
+      <div>
+        <span class="eyebrow">Services</span>
+        <h2>What Can We Offer You</h2>
+        <p class="lead">Engineered solutions custom tailored to modern requirements. We address constraints through
+          reliable infrastructure protocols and bespoke development pipelines.</p>
+      </div>
+      <div class="svc-list">
+        <div class="svc-card">
+          <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
+            </svg></div>
+          <div>
+            <h3>Software Development</h3>
+            <p>Custom web application development, microservices setups, and performance optimizations. We build using
+              high-availability patterns.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 3v18h18" />
+              <path d="m7 15 4-4 3 3 5-6" />
+            </svg></div>
+          <div>
+            <h3>IT Consulting &amp; Strategy</h3>
+            <p>Audit your technological legacy and structure scalable roadmaps. We guide technical transitions with
+              minimal pipeline friction.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="6" width="14" height="12" rx="2" />
+              <path d="m22 8-6 4 6 4V8Z" />
+            </svg></div>
+          <div>
+            <h3>Creative &amp; Media Production</h3>
+            <p>Engaging visuals, digital media pipelines, and dynamic asset management that amplify your modern
+              operational footprint.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg></div>
+          <div>
+            <h3>Supporting Experience</h3>
+            <p>Continuous optimization, dedicated personnel training, and system maintenance that guarantee sustained
+              success rates.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wave-b"><svg viewBox="0 0 1440 130" preserveAspectRatio="none">
+        <path fill="var(--wave)" d="M0,60 C260,20 520,100 780,64 C1020,32 1220,96 1440,58 L1440,130 L0,130 Z" />
+      </svg></div>
+  </section>
+
+  <!-- ============ PORTFOLIO ============ -->
+  <section class="block portfolio">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <span class="eyebrow">Portfolio</span>
+          <h2>Our Recent Architectures</h2>
+        </div>
+        <a class="view-all" href="#">View All Projects</a>
+      </div>
+      <div class="proj-grid">
+        <div class="proj-card">
+          <div class="proj-thumb thumb-1">
+            <svg class="crown" width="70" height="70" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 8l4 4 5-7 5 7 4-4-2 12H5L3 8Z" />
+            </svg>
+          </div>
+          <div class="proj-body">
+            <span class="tag">Enterprise Cloud</span>
+            <h3>Apex Infrastructure Migration</h3>
+            <p>Transitioned core pipelines to zero-trust microservice networks with zero downtime.</p>
+          </div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-thumb thumb-2">
+            <svg class="crown" width="70" height="70" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 8l4 4 5-7 5 7 4-4-2 12H5L3 8Z" />
+            </svg>
+          </div>
+          <div class="proj-body">
+            <span class="tag">Bespoke Software</span>
+            <h3>Vertex Ledger Architecture</h3>
+            <p>High frequency ledger system built to manage and authenticate decentralized assets.</p>
+          </div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-thumb thumb-3">
+            <svg class="crown" width="70" height="70" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 8l4 4 5-7 5 7 4-4-2 12H5L3 8Z" />
+            </svg>
+          </div>
+          <div class="proj-body">
+            <span class="tag">Automation</span>
+            <h3>Krypton Workflow Automation</h3>
+            <p>Engineered complex robotics systems automation interface with millisecond feedback.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="block contact">
+    <div class="wave-t"><svg viewBox="0 0 1440 130" preserveAspectRatio="none">
+        <path fill="var(--wave)" d="M0,0 L1440,0 L1440,72 C1200,108 960,40 720,74 C480,104 240,38 0,66 Z" />
+      </svg></div>
+    <div class="wrap grid">
+      <div class="form-panel">
+        <h2>Let's Get in Touch</h2>
+        <p class="sub">Fill out the parameters below and a project officer will respond within 4 hours.</p>
+        <form onsubmit="return false">
+          <div class="field"><label>Full Name</label><input type="text" placeholder="Enter your name"></div>
+          <div class="field"><label>Email Address</label><input type="email" placeholder="Enter your email"></div>
+          <div class="field"><label>Message</label><textarea
+              placeholder="Tell us about your IT requirements..."></textarea></div>
+          <button class="btn" type="submit">Contact Us</button>
+        </form>
+      </div>
+      <div class="contact-info">
+        <span class="eyebrow">Office Infrastructure</span>
+        <h2>Our Headquarters</h2>
+        <p>Connect directly with our engineering department for architectural inquiries or high-volume enterprise
+          consultation.</p>
+        <div class="info-row">
+          <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg></div>
+          <div>
+            <div class="lbl">Address</div>
+            <div class="val">101 Innovation Boulevard, Tech District, Suite 500</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z" />
+            </svg></div>
+          <div>
+            <div class="lbl">Phone</div>
+            <div class="val">+1 (800) 555-MBIT</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m2 7 10 6 10-6" />
+            </svg></div>
+          <div>
+            <div class="lbl">Engineering &amp; Support</div>
+            <div class="val">ops@mitbit.com</div>
+          </div>
+        </div>
+        <div class="socials">
+          <div class="lbl">Follow Us</div>
+          <div class="row">
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4 0 4.75 2.63 4.75 6V21h-4v-5.3c0-1.26-.02-2.9-1.77-2.9s-2.03 1.38-2.03 2.8V21h-4z" />
+              </svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.4-1.3 1.7-2.2-.8.5-1.7.8-2.6 1a4 4 0 0 0-6.9 3.7A11.4 11.4 0 0 1 3.6 4.8a4 4 0 0 0 1.2 5.4c-.6 0-1.2-.2-1.8-.5v.1a4 4 0 0 0 3.2 3.9c-.5.2-1.1.2-1.7.1a4 4 0 0 0 3.7 2.8A8 8 0 0 1 2 18.6a11.3 11.3 0 0 0 6.1 1.8c7.4 0 11.4-6.1 11.4-11.4v-.5c.8-.6 1.5-1.3 2-2.1Z" />
+              </svg></a>
+            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.300-4.6-1.1-4.6-5a4 4 0 0 1 1-2.7c-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6a4 4 0 0 1 1 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.8v2.6c0 .3.2.6.7.5A10 10 0 0 0 12 2Z" />
+              </svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="wrap">
+      <div class="row">
+        <a class="logo" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="color:var(--teal)">
+            <path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z" />
+            <path d="M3 7l9 5 9-5M12 12v10" />
+          </svg>
+          <span>mitbit</span>
+        </a>
+        <div class="flinks">
+          <a href="#">Terms of Service</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Security Audits</a>
+        </div>
+      </div>
+      <div class="copy">
+        <span>© 2024 Mitbit Inc. All specifications subject to system engineering checks.</span>
+        <span>Designed with absolute technical integrity.</span>
+      </div>
+    </div>
+  </footer>
+  <div class="footer-deco">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path fill="#0a1420" d="M0 60 Q360 10 720 60 T1440 60 V120 H0 Z" opacity=".7" />
+      <path fill="#0c1826" d="M0 80 Q360 40 720 80 T1440 80 V120 H0 Z" />
+    </svg>
+  </div>
+
+  <script>
+    /* moving low-poly "plexus" network over the hero — styled like the brand asset:
+       thin yellow-green edges (K-nearest-neighbour → varied lengths, long crossing lines),
+       scattered glowing star nodes. */
+    (function () {
+      const c = document.getElementById('net');
+      if (!c) return;
+      const x = c.getContext('2d');
+      const K = 4;                 // edges per node → triangulated mesh with long spans
+      const LINE = '198,232,92';   // yellow-green, matches the asset's network lines
+      const DOT = '234,252,178';   // brighter yellow-green for the nodes
+      let w, h, pts, raf;
+
+      function size() {
+        w = c.width = c.offsetWidth;
+        h = c.height = c.offsetHeight;
+        const n = Math.min(70, Math.floor(w * h / 26000));   // fewer nodes → farther neighbours → longer lines
+        pts = Array.from({ length: n }, (_, i) => {
+          const ang = Math.random() * Math.PI * 2;      // random direction
+          const spd = 0.8 + Math.random() * 1.8;        // random speed per node → varied motion
+          return {
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: Math.cos(ang) * spd,
+            vy: Math.sin(ang) * spd,
+            star: (Math.random() < 0.2)                 // ~20% of nodes glow
+          };
+        });
+      }
+
+      function draw() {
+        x.clearRect(0, 0, w, h);
+        // move
+        for (const p of pts) {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+        }
+        // edges: connect each node to its K nearest neighbours (dedup with a key set)
+        const seen = new Set();
+        x.lineWidth = 1;
+        for (let i = 0; i < pts.length; i++) {
+          const a = pts[i];
+          const near = [];
+          for (let j = 0; j < pts.length; j++) {
+            if (j === i) continue;
+            const b = pts[j];
+            const d = Math.hypot(a.x - b.x, a.y - b.y);
+            near.push({ j, d });
+          }
+          near.sort((m, n) => m.d - n.d);
+          for (let k = 0; k < K && k < near.length; k++) {
+            const j = near[k].j, d = near[k].d;
+            const key = i < j ? i + '-' + j : j + '-' + i;
+            if (seen.has(key)) continue;
+            seen.add(key);
+            const b = pts[j];
+            // keep long edges visible (slower fade) → longer lines read clearly
+            const alpha = Math.max(.28, .85 - d / 3200);
+            x.strokeStyle = 'rgba(' + LINE + ',' + alpha + ')';
+            x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(b.x, b.y); x.stroke();
+          }
+        }
+        // nodes
+        for (const p of pts) {
+          x.beginPath();
+          if (p.star) {
+            x.fillStyle = 'rgba(' + DOT + ',1)';
+            x.shadowColor = 'rgba(' + DOT + ',1)';
+            x.shadowBlur = 18;
+            x.arc(p.x, p.y, 2.8, 0, 7);
+          } else {
+            x.fillStyle = 'rgba(' + DOT + ',.9)';
+            x.shadowColor = 'rgba(' + DOT + ',.8)';
+            x.shadowBlur = 8;
+            x.arc(p.x, p.y, 1.5, 0, 7);
+          }
+          x.fill();
+        }
+        x.shadowBlur = 0;
+        raf = requestAnimationFrame(draw);
+      }
+
+      size(); draw();
+      window.addEventListener('resize', () => { cancelAnimationFrame(raf); size(); draw(); });
+    })();
+  </script>
+
+</body>
+
+</html>
